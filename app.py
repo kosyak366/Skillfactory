@@ -7,9 +7,8 @@ bot = telebot.TeleBot(TOKEN)
 @bot.message_handler(commands=['start', 'help'])
 def help(message: telebot.types.Message):
     text = ('Здравствуйте, вы пришли к боту, который переводит валюту, чтобы попробовать напишите сообщение \n\
-по следующему примеру:\n\
-<имя валюты, цену которой хотите узнать> \n\
-<имя валюты, в которой надо узнать цену> \n\
+по следующему примеру: <наименование валюты, цену которой хотите узнать> \
+<наименование валюты, в которой надо узнать цену> \
 <количество первой валюты> \nЧтобы увидеть список валют напишите: /values')
     bot.reply_to(message, text)
 
@@ -36,7 +35,7 @@ def convert(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, f'Программе не удалось обработать команду:\n{e}')
     else:
-        text = f'Цена может меняться, но сейчас {quote} в {base} = {price} \nСтоимость {amount} {quote} = {total} {base}'
+        text = f'Цена может изменяться, но сейчас {quote} в {base} = {price} \nСтоимость {amount} {quote} = {total} {base}'
         bot.send_message(message.chat.id, text)
 
 bot.polling()
